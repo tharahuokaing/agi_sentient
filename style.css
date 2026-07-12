@@ -29,3 +29,244 @@ document.addEventListener('DOMContentLoaded', () => {
 
     animatedElements.forEach(el => observer.observe(el));
 });
+
+/* Google Fonts for clean English typography */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;500;600&display=swap');
+/* Khmer Font Setup */
+@import url('https://fonts.googleapis.com/css2?family=Kantumruuy+Pro:wght@400;500;600;700&display=swap');
+
+:root {
+    --bg-color: #f1f5f9;
+    --card-bg: rgba(255, 255, 255, 0.85);
+    --text-main: #0f172a;
+    --text-muted: #475569;
+    --accent: #2563eb;
+    --khmer-accent: #0284c7;
+    --border-color: rgba(226, 232, 240, 0.8);
+    --font-title: 'Space Grotesk', sans-serif;
+    --font-en: 'Inter', sans-serif;
+    --font-kh: 'Kantumruuy Pro', sans-serif;
+    --card-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05);
+    --glass-blur: blur(8px);
+}
+
+[data-theme="dark"] {
+    --bg-color: #0b0f19;
+    --card-bg: rgba(22, 30, 49, 0.75);
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --accent: #3b82f6;
+    --khmer-accent: #38bdf8;
+    --border-color: rgba(51, 65, 85, 0.5);
+    --card-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5), 0 0 50px -10px rgba(59, 130, 246, 0.1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                border-color 0.4s ease, 
+                box-shadow 0.4s ease;
+}
+
+body {
+    background-color: var(--bg-color);
+    background-image: 
+        radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.05) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(14, 165, 233, 0.05) 0px, transparent 50%);
+    color: var(--text-main);
+    font-family: var(--font-en);
+    line-height: 1.7;
+    padding-bottom: 5rem;
+}
+
+.container {
+    width: 92%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+header {
+    background-color: var(--card-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border-bottom: 1px solid var(--border-color);
+    padding: 1.2rem 0;
+    margin-bottom: 4rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h1 {
+    font-family: var(--font-title);
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: -0.05em;
+    background: linear-gradient(to right, var(--accent), var(--khmer-accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#theme-toggle {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 0.6rem;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#theme-toggle:hover {
+    transform: scale(1.05);
+}
+
+.intro {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.intro h2 {
+    font-family: var(--font-title);
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.75rem;
+}
+
+.subtitle {
+    font-family: var(--font-kh);
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+}
+
+.card {
+    background-color: var(--card-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    padding: 2.5rem;
+    box-shadow: var(--card-shadow);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Subtle accent line on top of cards */
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent), var(--khmer-accent));
+    opacity: 0.7;
+}
+
+.card-icon {
+    font-size: 2.2rem;
+    margin-bottom: 1.2rem;
+    display: inline-block;
+    background: rgba(59, 130, 246, 0.1);
+    padding: 0.5rem 0.8rem;
+    border-radius: 14px;
+}
+
+.card h3 {
+    font-family: var(--font-title);
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+    letter-spacing: -0.01em;
+}
+
+.khmer-title {
+    font-family: var(--font-kh);
+    color: var(--khmer-accent);
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background: linear-gradient(to right, var(--border-color), transparent);
+    margin-bottom: 1.5rem;
+}
+
+.lang-en, .lang-kh {
+    font-size: 0.98rem;
+    margin-bottom: 1.5rem;
+}
+
+.lang-en strong {
+    color: var(--accent);
+    display: block;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.25rem;
+}
+
+.lang-kh strong {
+    color: var(--khmer-accent);
+    display: block;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.25rem;
+}
+
+.lang-kh {
+    font-family: var(--font-kh);
+    color: var(--text-muted);
+    margin-bottom: 0;
+}
+
+/* Animations */
+.animate {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Hover effects for desktop devices */
+@media (hover: hover) {
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.1);
+        border-color: rgba(59, 130, 246, 0.3);
+    }
+    
+    [data-theme="dark"] .card:hover {
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 60px -5px rgba(59, 130, 246, 0.2);
+        border-color: rgba(59, 130, 246, 0.5);
+    }
+}
