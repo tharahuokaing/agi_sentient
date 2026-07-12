@@ -1,148 +1,31 @@
-/* Google Fonts for clean English typography */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
-/* Khmer Font Setup */
-@import url('https://fonts.googleapis.com/css2?family=Kantumruuy+Pro:wght@400;600;700&display=swap');
+document.addEventListener('DOMContentLoaded', () => {
+    const themeToggle = document.getElementById('theme-toggle');
+    
+    // Check local storage for theme preference
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    themeToggle.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
 
-:root {
-    --bg-color: #f8fafc;
-    --card-bg: #ffffff;
-    --text-main: #0f172a;
-    --text-muted: #475569;
-    --accent: #2563eb;
-    --border-color: #e2e8f0;
-    --font-en: 'Inter', sans-serif;
-    --font-kh: 'Kantumruuy Pro', sans-serif;
-}
+    // Theme Toggle Handler
+    themeToggle.addEventListener('click', () => {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        themeToggle.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+    });
 
-[data-theme="dark"] {
-    --bg-color: #0f172a;
-    --card-bg: #1e293b;
-    --text-main: #f8fafc;
-    --text-muted: #94a3b8;
-    --accent: #3b82f6;
-    --border-color: #334155;
-}
+    // Scroll Animation using IntersectionObserver
+    const animatedElements = document.querySelectorAll('.animate');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-body {
-    background-color: var(--bg-color);
-    color: var(--text-main);
-    font-family: var(--font-en);
-    line-height: 1.6;
-    padding-bottom: 3rem;
-}
-
-.container {
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-header {
-    background-color: var(--card-bg);
-    border-bottom: 1px solid var(--border-color);
-    padding: 1rem 0;
-    margin-bottom: 2rem;
-}
-
-.header-flex {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-h1 {
-    font-size: 1.5rem;
-    font-weight: 700;
-}
-
-#theme-toggle {
-    background: none;
-    border: 1px solid var(--border-color);
-    padding: 0.5rem;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 1.2rem;
-}
-
-.intro {
-    text-align: center;
-    margin-bottom: 3rem;
-}
-
-.intro h2 {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
-}
-
-.subtitle {
-    font-family: var(--font-kh);
-    color: var(--text-muted);
-    font-size: 1.2rem;
-}
-
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 2rem;
-}
-
-.card {
-    background-color: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    padding: 2rem;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-}
-
-.card-icon {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-}
-
-.card h3 {
-    font-size: 1.3rem;
-    margin-bottom: 0.25rem;
-}
-
-.khmer-title {
-    font-family: var(--font-kh);
-    color: var(--accent);
-    font-weight: 600;
-    margin-bottom: 1rem;
-}
-
-hr {
-    border: 0;
-    height: 1px;
-    background: var(--border-color);
-    margin-bottom: 1rem;
-}
-
-.lang-en {
-    margin-bottom: 1rem;
-    color: var(--text-main);
-}
-
-.lang-kh {
-    font-family: var(--font-kh);
-    color: var(--text-muted);
-}
-
-/* Animations */
-.animate {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-.animate.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
+    animatedElements.forEach(el => observer.observe(el));
+});
