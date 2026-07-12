@@ -1,41 +1,8 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const themeToggle = document.getElementById('theme-toggle');
-    
-    // Check local storage for theme preference
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    themeToggle.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
-
-    // Theme Toggle Handler
-    themeToggle.addEventListener('click', () => {
-        const currentTheme = document.documentElement.getAttribute('data-theme');
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        
-        document.documentElement.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-        themeToggle.textContent = newTheme === 'dark' ? '☀️' : '🌙';
-    });
-
-    // Scroll Animation using IntersectionObserver
-    const animatedElements = document.querySelectorAll('.animate');
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
-        });
-    }, { threshold: 0.1 });
-
-    animatedElements.forEach(el => observer.observe(el));
-});
-
-/* Google Fonts for clean English typography */
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;500;600&display=swap');
-/* Khmer Font Setup */
-@import url('https://fonts.googleapis.com/css2?family=Kantumruuy+Pro:wght@400;500;600;700&display=swap');
-
+/* ==========================================================================
+   DESIGN SYSTEM TOKENS & VARIABLES
+   ========================================================================== */
 :root {
+    /* Color Palette - Light Theme (Default) */
     --bg-color: #f1f5f9;
     --card-bg: rgba(255, 255, 255, 0.85);
     --text-main: #0f172a;
@@ -43,13 +10,28 @@ document.addEventListener('DOMContentLoaded', () => {
     --accent: #2563eb;
     --khmer-accent: #0284c7;
     --border-color: rgba(226, 232, 240, 0.8);
+    --card-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05);
+    --icon-bg: rgba(59, 130, 246, 0.1);
+
+    /* Typography Definitions */
     --font-title: 'Space Grotesk', sans-serif;
     --font-en: 'Inter', sans-serif;
     --font-kh: 'Kantumruuy Pro', sans-serif;
-    --card-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05);
+    
+    /* Global Structural Tokens */
     --glass-blur: blur(8px);
+    --radius-circle: 50%;
+    --radius-card: 24px;
+    --radius-icon: 14px;
+    
+    /* Standardized Performance Transitions */
+    --transition-theme: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                        border-color 0.4s ease, 
+                        box-shadow 0.4s ease;
+    --transition-transform: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
+/* Color Palette - Dark Theme Override */
 [data-theme="dark"] {
     --bg-color: #0b0f19;
     --card-bg: rgba(22, 30, 49, 0.75);
@@ -59,15 +41,22 @@ document.addEventListener('DOMContentLoaded', () => {
     --khmer-accent: #38bdf8;
     --border-color: rgba(51, 65, 85, 0.5);
     --card-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5), 0 0 50px -10px rgba(59, 130, 246, 0.1);
+    --icon-bg: rgba(59, 130, 246, 0.15);
 }
 
+/* ==========================================================================
+   GLOBAL CORE RESETS & DEFAULTS
+   ========================================================================== */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
-                border-color 0.4s ease, 
-                box-shadow 0.4s ease;
+    transition: var(--transition-theme);
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%; /* Fixes font scaling issues during orientation switch on Android */
 }
 
 body {
@@ -78,13 +67,36 @@ body {
     color: var(--text-main);
     font-family: var(--font-en);
     line-height: 1.7;
-    padding-bottom: 5rem;
+    padding-bottom: 3rem;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
+/* Optimized Webkit Scrollbars for Desktop (Ignored gracefully by native Android) */
+@media (min-width: 768px) {
+    body {
+        padding-bottom: 5rem;
+    }
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: var(--border-color);
+        border-radius: 4px;
+    }
+}
+
+/* ==========================================================================
+   LAYOUT CONTAINERS & HEADER FRAMEWORK
+   ========================================================================== */
 .container {
     width: 92%;
     max-width: 1100px;
     margin: 0 auto;
+    box-sizing: border-box;
 }
 
 header {
@@ -92,8 +104,8 @@ header {
     backdrop-filter: var(--glass-blur);
     -webkit-backdrop-filter: var(--glass-blur);
     border-bottom: 1px solid var(--border-color);
-    padding: 1.2rem 0;
-    margin-bottom: 4rem;
+    padding: 1rem 0;
+    margin-bottom: 2.5rem;
     position: sticky;
     top: 0;
     z-index: 100;
@@ -107,7 +119,7 @@ header {
 
 h1 {
     font-family: var(--font-title);
-    font-size: 1.4rem;
+    font-size: 1.25rem;
     font-weight: 700;
     letter-spacing: -0.05em;
     background: linear-gradient(to right, var(--accent), var(--khmer-accent));
@@ -119,27 +131,34 @@ h1 {
     background: var(--card-bg);
     border: 1px solid var(--border-color);
     padding: 0.6rem;
-    border-radius: 50%;
+    border-radius: var(--radius-circle);
     cursor: pointer;
     font-size: 1.1rem;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
     display: flex;
     align-items: center;
     justify-content: center;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    transition: var(--transition-transform), var(--transition-theme);
 }
 
-#theme-toggle:hover {
-    transform: scale(1.05);
+#theme-toggle:active {
+    transform: scale(0.92); /* Micro-interaction feedback for Android taps */
 }
 
+/* ==========================================================================
+   HERO & INTRO BLOCK TYPOGRAPHY
+   ========================================================================== */
 .intro {
     text-align: center;
-    margin-bottom: 4rem;
+    margin-bottom: 3rem;
 }
 
 .intro h2 {
     font-family: var(--font-title);
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 700;
     letter-spacing: -0.03em;
     margin-bottom: 0.75rem;
@@ -148,15 +167,18 @@ h1 {
 .subtitle {
     font-family: var(--font-kh);
     color: var(--text-muted);
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 500;
     letter-spacing: 0.02em;
 }
 
+/* ==========================================================================
+   DYNAMIC RESPONSIVE CARD GRID SYSTEM
+   ========================================================================== */
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 2.5rem;
+    grid-template-columns: 1fr; /* Single column on mobile viewports */
+    gap: 1.5rem;
 }
 
 .card {
@@ -164,14 +186,19 @@ h1 {
     backdrop-filter: var(--glass-blur);
     -webkit-backdrop-filter: var(--glass-blur);
     border: 1px solid var(--border-color);
-    border-radius: 24px;
-    padding: 2.5rem;
+    border-radius: var(--radius-card);
+    padding: 1.75rem;
     box-shadow: var(--card-shadow);
     position: relative;
     overflow: hidden;
+    transition: var(--transition-transform), var(--transition-theme);
 }
 
-/* Subtle accent line on top of cards */
+/* Android Active Tap Interaction State */
+.card:active {
+    transform: scale(0.98);
+}
+
 .card::before {
     content: '';
     position: absolute;
@@ -184,17 +211,17 @@ h1 {
 }
 
 .card-icon {
-    font-size: 2.2rem;
-    margin-bottom: 1.2rem;
+    font-size: 2rem;
+    margin-bottom: 1rem;
     display: inline-block;
-    background: rgba(59, 130, 246, 0.1);
+    background: var(--icon-bg);
     padding: 0.5rem 0.8rem;
-    border-radius: 14px;
+    border-radius: var(--radius-icon);
 }
 
 .card h3 {
     font-family: var(--font-title);
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     font-weight: 700;
     margin-bottom: 0.4rem;
     letter-spacing: -0.01em;
@@ -204,52 +231,52 @@ h1 {
     font-family: var(--font-kh);
     color: var(--khmer-accent);
     font-weight: 600;
-    font-size: 1.1rem;
-    margin-bottom: 1.5rem;
+    font-size: 1.05rem;
+    margin-bottom: 1.25rem;
 }
 
 hr {
     border: 0;
     height: 1px;
     background: linear-gradient(to right, var(--border-color), transparent);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
 }
 
 .lang-en, .lang-kh {
-    font-size: 0.98rem;
-    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+    margin-bottom: 1.25rem;
+}
+
+.lang-en strong, .lang-kh strong {
+    display: block;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.25rem;
 }
 
 .lang-en strong {
     color: var(--accent);
-    display: block;
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 0.25rem;
 }
 
 .lang-kh strong {
     color: var(--khmer-accent);
-    display: block;
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 0.25rem;
 }
 
 .lang-kh {
     font-family: var(--font-kh);
     color: var(--text-muted);
-    margin-bottom: 0;
+    margin-bottom: 0; /* Clear bottom margins on final localized layout array */
 }
 
-/* Animations */
+/* ==========================================================================
+   INTERSECTION OBSERVER SCROLL ANIMATIONS
+   ========================================================================== */
 .animate {
     opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
-                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateY(20px); /* Reduced slide-up distance for faster layout rendering */
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+                transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .animate.visible {
@@ -257,16 +284,78 @@ hr {
     transform: translateY(0);
 }
 
-/* Hover effects for desktop devices */
-@media (hover: hover) {
-    .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.1);
-        border-color: rgba(59, 130, 246, 0.3);
+/* ==========================================================================
+   DESKTOP MEDIA QUERIES (768px and up)
+   ========================================================================== */
+@media (min-width: 768px) {
+    header {
+        padding: 1.2rem 0;
+        margin-bottom: 4rem;
     }
-    
-    [data-theme="dark"] .card:hover {
-        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 60px -5px rgba(59, 130, 246, 0.2);
-        border-color: rgba(59, 130, 246, 0.5);
+
+    h1 {
+        font-size: 1.4rem;
+    }
+
+    .intro {
+        margin-bottom: 4rem;
+    }
+
+    .intro h2 {
+        font-size: 2.5rem;
+    }
+
+    .subtitle {
+        font-size: 1.2rem;
+    }
+
+    .grid {
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2.5rem;
+    }
+
+    .card {
+        padding: 2.5rem;
+    }
+
+    .card-icon {
+        font-size: 2.2rem;
+        margin-bottom: 1.2rem;
+    }
+
+    .card h3 {
+        font-size: 1.4rem;
+    }
+
+    .khmer-title {
+        font-size: 1.1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    hr {
+        margin-bottom: 1.5rem;
+    }
+
+    .lang-en, .lang-kh {
+        font-size: 0.98rem;
+        margin-bottom: 1.5rem;
+    }
+
+    /* Standard Desktop Hover Triggers Isolated from Mobile Views */
+    @media (hover: hover) {
+        #theme-toggle:hover {
+            transform: scale(1.05);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.1);
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+        
+        [data-theme="dark"] .card:hover {
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 60px -5px rgba(59, 130, 246, 0.2);
+            border-color: rgba(59, 130, 246, 0.5);
+        }
     }
 }
