@@ -14,14 +14,15 @@
     <!-- Heading Section with custom indicator -->
     <div class="math-main-heading">
         <div class="math-heading-indicator"></div>
-        <span class="font-khmer">ប្រៀបធៀប AI: AGI និង Sentient AI (Intelligence vs. Consciousness)</span>
+        <!-- Enforced data attribute binding for your script1.js engine -->
+        <span class="font-khmer" data-translate="khmerCurriculumTitle">ប្រៀបធៀប AI: AGI និង Sentient AI (Intelligence vs. Consciousness)</span>
     </div>
 
     <!-- Side-by-Side Comparison Grid -->
     <div class="primary-curriculum-grid">
         
         <!-- AGI Card -->
-        <div class="grade-card card-math-blue">
+        <div class="grade-card card-math-blue" id="agi-card">
             <div>
                 <div class="grade-icon">🧠</div>
                 <div class="grade-title">Artificial General Intelligence (AGI)</div>
@@ -39,7 +40,7 @@
         </div>
 
         <!-- Sentient AI Card -->
-        <div class="grade-card card-math-amber">
+        <div class="grade-card card-math-amber" id="sentient-card">
             <div>
                 <div class="grade-icon">✨</div>
                 <div class="grade-title">Sentient Artificial Intelligence</div>
@@ -57,11 +58,11 @@
         </div>
 
         <!-- Relationship & Summary Card -->
-        <div class="grade-card card-khmer-indigo">
+        <div class="grade-card card-khmer-indigo" id="distinction-card">
             <div>
                 <div class="grade-icon">⚖️</div>
                 <div class="grade-title">The Key Distinction</div>
-                <p class="grade-desc">
+                <p class="grade-desc" data-translate="complianceText">
                     Simply put: <strong>AGI is about doing; Sentience is about being.</strong> An AI could hypothetically be an exceptional, super-intelligent AGI problem solver while remaining completely cold, hollow, and non-sentient.
                 </p>
             </div>
@@ -73,8 +74,8 @@
     </div>
 </div>
 
-<!-- Link to external JavaScript file -->
-<script src="script.js"></script
+<!-- Scripts loaded correctly with clean DOM terminations -->
+<script src="script.js"></script>
 <script src="script1.js"></script>
 </body>
 </html>
