@@ -67,7 +67,7 @@ body {
     color: var(--text-main);
     font-family: var(--font-en);
     line-height: 1.625;
-    padding-bottom: 4rem;
+    padding-block-end: 4rem;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
@@ -97,8 +97,8 @@ body {
 .container {
     width: 100%;
     max-width: 1140px;
-    margin: 0 auto;
-    padding: 0 1.25rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
 }
 
 header {
@@ -106,8 +106,8 @@ header {
     backdrop-filter: var(--glass-blur);
     -webkit-backdrop-filter: var(--glass-blur);
     border-bottom: 1px solid var(--border-color);
-    padding: 1rem 0;
-    margin-bottom: 2.5rem;
+    padding-block: 1rem;
+    margin-block-end: 2.5rem;
     position: sticky;
     top: 0;
     z-index: 100;
@@ -135,8 +135,8 @@ h1 {
 
 .intro {
     text-align: center;
-    margin-bottom: 2.5rem;
-    padding: 0 0.5rem;
+    margin-block-end: 2.5rem;
+    padding-inline: 0.5rem;
 }
 
 .intro h2 {
@@ -145,7 +145,7 @@ h1 {
     font-weight: 700;
     letter-spacing: -0.03em;
     line-height: 1.25;
-    margin-bottom: 0.5rem;
+    margin-block-end: 0.5rem;
     color: var(--text-main);
 }
 
@@ -204,7 +204,6 @@ h1 {
     transition: border-color 0.4s ease, background-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Mobile Tapping Interaction Feedback */
 .card:active {
     transform: scale(0.985);
 }
@@ -222,8 +221,10 @@ h1 {
 
 .card-icon {
     font-size: 1.85rem;
-    margin-bottom: 1rem;
-    display: inline-block;
+    margin-block-end: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     align-self: flex-start;
     background: rgba(59, 130, 246, 0.08);
     padding: 0.4rem 0.7rem;
@@ -234,7 +235,7 @@ h1 {
     font-family: var(--font-title);
     font-size: 1.25rem;
     font-weight: 700;
-    margin-bottom: 0.25rem;
+    margin-block-end: 0.25rem;
     letter-spacing: -0.01em;
 }
 
@@ -243,19 +244,17 @@ h1 {
     color: var(--khmer-accent);
     font-weight: 600;
     font-size: 1.05rem;
-    margin-bottom: 1.25rem;
+    margin-block-end: 1.25rem;
 }
 
-hr {
-    border: 0;
-    height: 1px;
-    background: linear-gradient(to right, var(--border-color), transparent);
-    margin-bottom: 1.25rem;
+.card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
 }
 
 .lang-en, .lang-kh {
     font-size: 0.95rem;
-    margin-bottom: 1.25rem;
 }
 
 .lang-en strong, .lang-kh strong {
@@ -263,7 +262,7 @@ hr {
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    margin-bottom: 0.25rem;
+    margin-block-end: 0.25rem;
 }
 
 .lang-en strong { color: var(--accent); }
@@ -272,7 +271,6 @@ hr {
 .lang-kh {
     font-family: var(--font-kh);
     color: var(--text-muted);
-    margin-bottom: 0;
 }
 
 /* ==========================================================================
@@ -296,12 +294,12 @@ hr {
    ========================================================================== */
 @media (min-width: 768px) {
     .container {
-        padding: 0 2rem;
+        padding-inline: 2rem;
     }
     
     header {
-        padding: 1.2rem 0;
-        margin-bottom: 4rem;
+        padding-block: 1.2rem;
+        margin-block-end: 4rem;
         border-radius: 0 0 var(--radius-header) var(--radius-header);
     }
     
@@ -310,12 +308,12 @@ hr {
     }
     
     .intro {
-        margin-bottom: 4rem;
+        margin-block-end: 4rem;
     }
     
     .intro h2 {
         font-size: 2.5rem;
-        margin-bottom: 0.75rem;
+        margin-block-end: 0.75rem;
     }
     
     .subtitle {
@@ -333,30 +331,25 @@ hr {
     
     .card-icon {
         font-size: 2.2rem;
-        margin-bottom: 1.2rem;
+        margin-block-end: 1.2rem;
     }
     
     .card h3 {
         font-size: 1.4rem;
-        margin-bottom: 0.4rem;
+        margin-block-end: 0.4rem;
     }
     
     .khmer-title {
         font-size: 1.1rem;
-        margin-bottom: 1.5rem;
+        margin-block-end: 1.5rem;
     }
     
-    hr {
-        margin-bottom: 1.5rem;
+    .card-body {
+        gap: 1.5rem;
     }
     
     .lang-en, .lang-kh {
         font-size: 0.98rem;
-        margin-bottom: 1.5rem;
-    }
-    
-    .lang-kh {
-        margin-bottom: 0;
     }
 }
 
