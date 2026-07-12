@@ -1,62 +1,95 @@
 /**
  * script1.js
- * Handles the logic for the Khmer Curriculum interactions and card highlighting.
- * Target Site: HUOKAING THARA INTERNATIONAL SCHOOL
+ * Handles language localization and interactive content updates for 
+ * HUOKAING THARA INTERNATIONAL SCHOOL.
  */
 
-document.addEventListener('DOMContentLoaded', () => {
-    console.log("Khmer Curriculum Track initialized successfully.");
-});
+// 1. Translation Data Matrix
+const khmerTranslations = {
+    // School Branding & Universal Elements
+    schoolTitle: "សាលាអន្តរជាតិ ហួកាំង ថារ៉ា",
+    schoolSubtitle: "កម្មវិធីសិក្សាតាមប្រព័ន្ធអនឡាញ (ថ្នាក់ទី១ ដល់ ថ្នាក់ទី៦)",
+    heroTagline: "អប់រំប្រកបដោយគុណភាព វិន័យ និងគុណធម៌",
+    heroDesc: "ស្វាគមន៍មកកាន់ប្រព័ន្ធសិក្សាបែបឌីជីថលឈានមុខគេ។ យើងផ្តល់ជូននូវបរិយាកាសសិក្សាតាមអនឡាញដ៏សំបូរបែប ងាយស្រួល និងមានប្រសិទ្ធភាពខ្ពស់សម្រាប់កូនៗរបស់លោកអ្នក។",
+    
+    // Primary Curriculum Headers
+    khmerCurriculumTitle: "កម្មវិធីសិក្សាភាសាខ្មែរ",
+    mathCurriculumTitle: "កម្មវិធីសិក្សាកម្រិតបឋមសិក្សាគណិតវិទ្យា",
+    mathPreCurriculumTitle: "វគ្គកម្មវិធីសិក្សាគណិតវិទ្យា (មុនកម្រិតបឋមសិក្សា)",
+    
+    // Class Tracks & Descriptions
+    prepMathTitle: "ថ្នាក់ត្រៀមគណិតវិទ្យា",
+    prepMathDesc: "រៀនស្គាល់លេខ ការរាប់ចំនួនជាមូលដ្ឋាន រូបធរណីមាត្រសាមញ្ញ និងការគណនាកម្រិតដំបូង ដើម្បីបង្កើនភាពជឿជាក់ និងត្រៀមខ្លួនរួចជាស្រេចមុនចូលរៀនថ្នាក់ទី១។",
+    
+    grade1_2Title: "ថ្នាក់ទី១ និង ទី២",
+    grade1_2Desc: "ពង្រឹងមូលដ្ឋានគ្រឹះអក្សរសាស្ត្រខ្មែរ/គណិតវិទ្យាដំបូង និងជំនាញទំនាក់ទំនងជាមូលដ្ឋាន។",
+    
+    grade3_4Title: "ថ្នាក់ទី៣ និង ទី៤",
+    grade3_4Desc: "អភិវឌ្ឍការគិតពិចារណា ការសិក្សាភាសាបរទេសកម្រិតដំបូង និងវិទ្យាសាស្ត្រសង្គមផ្សេងៗ។",
+    
+    grade5_6Title: "ថ្នាក់ទី៥ និង ទី៦",
+    grade5_6Desc: "ត្រៀមលក្ខណៈសម្រាប់ការផ្លាស់ប្តូរទៅកាន់មធ្យមសិក្សា ជាមួយមេរៀនស៊ីជម្រៅ និងបច្ចេកវិទ្យា។",
+    
+    // Buttons & Miscellaneous
+    btnViewDetails: "🔽 មើលលម្អិត",
+    btnEnterPrepClass: "ចូលរៀនថ្នាក់ត្រៀមគណិតវិទ្យា",
+    complianceText: "រាល់កម្មវិធីសិក្សាតាមអនឡាញទាំងអស់របស់សាលាអន្តរជាតិ ហួកាំង ថារ៉ា ត្រូវបានរៀបចំឡើងយ៉ាងហ្មត់ចត់ ដើម្បីធានាបាននូវគុណភាពសិក្សាខ្ពស់ស្របតាមការណែនាំរបស់ក្រសួង។"
+};
 
 /**
- * Automatically forwards students to the official MOEYS E-Learning portal 
- * for their specific grade level.
- * 
- * @param {number} grade - The primary grade number (1 to 6)
+ * Automatically applies translation strings to elements matching data attributes
+ * with a smooth transition.
  */
-function navigateToKhmerLesson(grade) {
-    if (!grade || grade < 1 || grade > 6) {
-        console.error("Invalid grade level selected.");
-        return;
-    }
+function translatePageToKhmer() {
+    console.log("Translating interface elements to Khmer...");
 
-    // Official Ministry of Education, Youth and Sports (MoEYS) portal links mapping
-    const moeysKhmerRoutes = {
-        1: "https://elearning.moeys.gov.kh/k1/khmer/",
-        2: "https://elearning.moeys.gov.kh/k2/khmer/",
-        3: "https://elearning.moeys.gov.kh/k3/khmer/",
-        4: "https://elearning.moeys.gov.kh/k4/khmer/",
-        5: "https://elearning.moeys.gov.kh/k5/khmer/",
-        6: "https://elearning.moeys.gov.kh/k6/khmer/"
-    };
+    // Query all elements containing a localized data attribute markup
+    const elementsToTranslate = document.querySelectorAll('[data-translate]');
 
-    const targetUrl = moeysKhmerRoutes[grade];
-    console.log(`Redirecting to Grade ${grade} Khmer Portal: ${targetUrl}`);
-    window.location.href = targetUrl;
+    elementsToTranslate.forEach(element => {
+        const translationKey = element.getAttribute('data-translate');
+        
+        if (khmerTranslations[translationKey]) {
+            // Apply a brief fade-out effect if element has transition classes
+            element.style.opacity = '0';
+            
+            setTimeout(() => {
+                // Insert the Khmer text structure
+                element.textContent = khmerTranslations[translationKey];
+                
+                // Add the layout font family class dynamically
+                element.classList.add('font-khmer');
+                
+                // Fade back in smoothly
+                element.style.opacity = '1';
+                element.style.transition = 'opacity 0.3s ease';
+            }, 150);
+        }
+    });
 }
 
 /**
- * Highlights a specific curriculum card when selected via announcement or click notifications,
- * utilizing the smooth transition styles defined in section 3 of your style.css.
- * 
- * @param {string} cardId - The DOM element ID of the card to focus on
+ * Highlight and focus cards when an announcement or navigation trigger is executed
+ * @param {string} cardId - The target element ID attribute
  */
 function highlightCurriculumCard(cardId) {
-    const cardElement = document.getElementById(cardId);
-    
-    if (!cardElement) {
-        console.warn(`Card element with ID "${cardId}" not found.`);
-        return;
+    const targetCard = document.getElementById(cardId);
+    if (targetCard) {
+        // Scroll smoothly to target element context
+        targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        
+        // Apply the custom transition state ring defined in style.css
+        targetCard.classList.add('ring-4');
+        
+        // Remove the visual ring flash after attention is captured
+        setTimeout(() => {
+            targetCard.classList.remove('ring-4');
+        }, 1600);
     }
-
-    // Scroll to the card smoothly
-    cardElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-    // Apply the ring-4 style configuration for the focus indicator
-    cardElement.classList.add('ring-4');
-    
-    // Smoothly remove the emphasis indicator after 2.5 seconds
-    setTimeout(() => {
-        cardElement.classList.remove('ring-4');
-    }, 2500);
 }
+
+// Initialize when DOM is structurally verified
+document.addEventListener('DOMContentLoaded', () => {
+    // Optional: Trigger automatic translation translation layer execution
+    // translatePageToKhmer();
+});
