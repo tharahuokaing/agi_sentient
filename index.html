@@ -11,6 +11,9 @@
 
 <div class="math-section-container section-fade" style="padding: 40px; max-width: 1200px; margin: 0 auto;">
     
+    <!-- Google Translate Button Container -->
+    <div id="google_translate_element" style="text-align: right; margin-bottom: 20px;"></div>
+
     <!-- Heading Section with custom indicator -->
     <div class="math-main-heading">
         <div class="math-heading-indicator"></div>
@@ -73,6 +76,14 @@
 
     </div>
 </div>
+
+<!-- Google Translate Scripts -->
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+}
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 <!-- Scripts loaded correctly with clean DOM terminations -->
 <script src="script.js"></script>
