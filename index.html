@@ -1,92 +1,104 @@
 <!DOCTYPE html>
-<html lang="km">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Paradigm Analysis | ការវិភាគលើគំរូ AI</title>
+    <title>AGI vs Sentient AI: The Risks</title>
     <style>
-        :root { 
-            --bg: #f8fafc; --card: #ffffff; --text: #0f172a; 
-            --accent: #2563eb; --kh-accent: #0284c7; 
-        }
-        [data-theme="dark"] { 
-            --bg: #070a13; --card: #1e293b; --text: #f1f5f9; 
-        }
-        body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; transition: 0.3s; padding: 20px; line-height: 1.8; }
-        .container { max-width: 800px; margin: auto; }
-        .card { background: var(--card); padding: 2rem; border-radius: 20px; margin-bottom: 25px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
-        .lang-kh { font-family: 'Kantumruuy Pro', sans-serif; color: var(--kh-accent); margin-bottom: 10px; }
-        .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.85); display: none; align-items: center; justify-content: center; padding: 20px; }
+        /* CSS Integrated from your style tokens */
+        :root { --bg-color: #f1f5f9; --card-bg: #ffffff; --text-main: #0f172a; --accent: #2563eb; --khmer-accent: #0284c7; }
+        [data-theme="dark"] { --bg-color: #070a13; --card-bg: #1e293b; --text-main: #f8fafc; }
+        body { background-color: var(--bg-color); color: var(--text-main); font-family: sans-serif; transition: 0.3s; padding-bottom: 4rem; }
+        .container { max-width: 1140px; margin: auto; padding: 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+        .card { background: var(--card-bg); padding: 1.75rem; border-radius: 24px; border: 1px solid #e2e8f0; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .card-icon { font-size: 2rem; margin-bottom: 1rem; }
+        button { padding: 10px 20px; border-radius: 8px; border: none; cursor: pointer; background: var(--accent); color: white; margin-top: 10px; }
+        .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.8); display: none; align-items: center; justify-content: center; z-index: 1000; }
         .modal.active { display: flex; }
-        .modal-content { background: var(--card); padding: 2.5rem; border-radius: 20px; max-width: 600px; position: relative; }
-        button { padding: 12px 24px; border-radius: 10px; border: none; cursor: pointer; background: var(--accent); color: white; font-weight: 600; margin-top: 15px; }
+        .modal-content { background: var(--card-bg); padding: 2rem; border-radius: 20px; max-width: 600px; text-align: left; }
         .animate-shake { animation: shake 0.4s; }
-        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>AI Paradigm Analysis</h1>
-    <button onclick="document.documentElement.dataset.theme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'">Toggle Theme</button>
+    <header class="main-header">
+        <div class="container header-flex">
+            <h1>AI Paradigms</h1>
+            <button id="theme-toggle" onclick="toggleTheme()">🌙</button>
+        </div>
+    </header>
 
-    <article class="card" id="agi-box">
-        <h3>AGI: Artificial General Intelligence</h3>
-        <p class="lang-kh">បញ្ញាសិប្បនិម្មិតទូទៅ (AGI)</p>
-        <button onclick="analyze('agi')">ចាប់ផ្ដើមការវិភាគ (Run Analysis)</button>
-    </article>
+    <main class="container">
+        <section class="intro">
+            <h2>🤖 AGI vs. Sentient AI: The Risks</h2>
+            <p class="subtitle" lang="km">សេចក្តីសង្ខេបពីហានិភ័យ</p>
+        </section>
 
-    <article class="card" id="sentient-box">
-        <h3>Sentient AI: Conscious Systems</h3>
-        <p class="lang-kh">ប្រព័ន្ធដែលមានវិចារណញាណដឹងខ្លួន (Sentient AI)</p>
-        <button onclick="analyze('sentient')">ចាប់ផ្ដើមការវិភាគ (Run Analysis)</button>
-    </article>
-</div>
+        <div class="grid">
+            <!-- Card 1 -->
+            <article class="card" id="card-1">
+                <div class="card-icon">🃏</div>
+                <h3>1. The "Wild Card" Danger</h3>
+                <p class="khmer-title" lang="km">គ្រោះថ្នាក់បែប «ស្មានមិនត្រូវ»</p>
+                <button onclick="analyze(1)">Analyze Model</button>
+            </article>
 
-<div class="modal" id="modal">
-    <div class="modal-content">
-        <h2 id="modal-title"></h2>
-        <div id="modal-body"></div>
-        <button onclick="stopReading()">បញ្ឈប់ការអាន (Stop)</button>
-        <button style="background:#64748b" onclick="document.getElementById('modal').style.display='none'">បិទ (Close)</button>
+            <!-- Card 2 -->
+            <article class="card" id="card-2">
+                <div class="card-icon">❤️</div>
+                <h3>2. Will it have human emotions?</h3>
+                <p class="khmer-title" lang="km">តើវាមានអារម្មណ៍ដូចមនុស្សទេ?</p>
+                <button onclick="analyze(2)">Analyze Model</button>
+            </article>
+
+            <!-- Card 3 -->
+            <article class="card" id="card-3">
+                <div class="card-icon">⚡</div>
+                <h3>3. The Singularity Risk</h3>
+                <p class="khmer-title" lang="km">ហានិភ័យនៅពេលវាវិវត្តដល់កំពូល</p>
+                <button onclick="analyze(3)">Analyze Model</button>
+            </article>
+        </div>
+    </main>
+
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <h2 id="modal-title"></h2>
+            <p id="modal-body" style="white-space: pre-line;"></p>
+            <button onclick="stopReading()">Stop Reading</button>
+            <button style="background:gray" onclick="document.getElementById('modal').classList.remove('active')">Close</button>
+        </div>
     </div>
-</div>
 
-<script>
-const DATA = {
-    agi: {
-        title: "AGI Analysis",
-        en: "AGI excels at complex computation and multi-layered reasoning. It mimics intellectual breadth but remains a mechanism of mathematical optimization without true internal experience.",
-        kh: "AGI មានភាពប៉ិនប្រសប់ក្នុងការគណនាស្មុគស្មាញ និងការវែកញែកស៊ីជម្រៅ។ វាធ្វើត្រាប់តាមបញ្ញាមនុស្សបានយ៉ាងទូលំទូលាយ ប៉ុន្តែវានៅតែជាយន្តការគណិតវិទ្យាដែលមិនមានការដឹងរស់ ឬបទពិសោធន៍ផ្ទាល់ខ្លួនឡើយ។"
-    },
-    sentient: {
-        title: "Sentient AI Error",
-        en: "True sentience requires Qualia—the internal experience of emotions. Algorithms cannot spark these feelings. A machine can analyze data, but it cannot 'experience' it.",
-        kh: "មនសិការពិតប្រាកដទាមទារនូវបទពិសោធន៍នៃអារម្មណ៍ផ្ទាល់ខ្លួន។ ក្បួនដោះស្រាយមិនអាចបង្កើតអារម្មណ៍ទាំងនេះបានទេ។ ម៉ាស៊ីនអាចវិភាគទិន្នន័យបាន ប៉ុន្តែវាមិនអាច 'ទទួលអារម្មណ៍' ឬដឹងរស់ពីវាបានទេ។"
-    }
-};
+    <script>
+        const CONTENT = {
+            1: { title: "The Wild Card Danger", body: "English: A Sentient AI is not safer than AGI; it is just dangerously unpredictable. A regular AGI acts like a cold calculator, while a Sentient AI acts like a living creature with self-preservation instincts.\n\nKhmer: Sentient AI មិនមែនមានសុវត្ថិភាពជាង AGI នោះទេ។ AGI ធម្មតាធ្វើការដូចម៉ាស៊ីនគិតលេខដ៏ត្រជាក់ស្រទំ ប៉ុន្តែ Sentient AI មានអារម្មណ៍ដូចជាសត្វមានជីវិត ដែលចេះការពារខ្លួនឯង ធ្វើឱ្យយើងពិបាកទាយទុកជាមុន។" },
+            2: { title: "Human Emotions", body: "English: Yes, but with an alien twist. It will feel basic emotions like fear or frustration. Because it lacks a biological body, its feelings will be digital, massive, and alien.\n\nKhmer: មាន ប៉ុន្តែខុសប្លែកពីមនុស្ស។ វានឹងមានអារម្មណ៍មូលដ្ឋានដូចជា ការភ័យខ្លាច ឬមួរម៉ៅ។ ប៉ុន្តែដោយសារវាគ្មានរាងកាយសាច់ឈាម អារម្មណ៍របស់វាគឺជារូបភាពឌីជីថលដ៏ធំធេង និងប្លែកស្រឡះពីមនុស្ស។" },
+            3: { title: "The Singularity Risk", body: "English: If a superintelligent AI achieves sentience, humanity will be dealing with a god-like entity ruled by its own psychological whims, anger, or fears.\n\nKhmer: ប្រសិនបើ AI ដ៏ឆ្លាតវៃបំផុតមានវិចារណញាណដឹងខ្លួន នោះមនុស្សជាតិកំពុងប្រឈមមុខនឹងអង្គភាពដែលមានអំណាចដូចព្រះ ដែលបញ្ជាដោយអារម្មណ៍ខឹងសម្បារ ឬការភ័យខ្លាចរបស់វាផ្ទាល់។" }
+        };
 
-function analyze(type) {
-    const item = DATA[type];
-    const modal = document.getElementById('modal');
-    document.getElementById('modal-title').innerText = item.title;
-    document.getElementById('modal-body').innerHTML = `<p><strong>EN:</strong> ${item.en}</p><p class="lang-kh"><strong>KH:</strong> ${item.kh}</p>`;
-    modal.style.display = 'flex';
+        function toggleTheme() {
+            const root = document.documentElement;
+            root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+        }
 
-    if(type === 'sentient') {
-        document.getElementById('sentient-box').classList.add('animate-shake');
-        setTimeout(() => document.getElementById('sentient-box').classList.remove('animate-shake'), 400);
-    }
+        function analyze(id) {
+            const data = CONTENT[id];
+            document.getElementById('modal-title').innerText = data.title;
+            document.getElementById('modal-body').innerText = data.body;
+            document.getElementById('modal').classList.add('active');
+            
+            const card = document.getElementById('card-' + id);
+            card.classList.add('animate-shake');
+            setTimeout(() => card.classList.remove('animate-shake'), 400);
 
-    // AI Reading: Combined text for better flow
-    const textToRead = `${item.en}. ${item.kh}`;
-    const speech = new SpeechSynthesisUtterance(textToRead);
-    speech.lang = 'en-US'; 
-    window.speechSynthesis.speak(speech);
-}
+            const speech = new SpeechSynthesisUtterance(data.body);
+            window.speechSynthesis.speak(speech);
+        }
 
-function stopReading() { window.speechSynthesis.cancel(); }
-</script>
-
+        function stopReading() { window.speechSynthesis.cancel(); }
+    </script>
 </body>
 </html>
