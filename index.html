@@ -1,70 +1,92 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="km">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AGI vs Sentient AI: The Risks</title>
-    <link rel="stylesheet" href="style.css">
+    <title>AI Paradigm Analysis | ការវិភាគលើគំរូ AI</title>
+    <style>
+        :root { 
+            --bg: #f8fafc; --card: #ffffff; --text: #0f172a; 
+            --accent: #2563eb; --kh-accent: #0284c7; 
+        }
+        [data-theme="dark"] { 
+            --bg: #070a13; --card: #1e293b; --text: #f1f5f9; 
+        }
+        body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; transition: 0.3s; padding: 20px; line-height: 1.8; }
+        .container { max-width: 800px; margin: auto; }
+        .card { background: var(--card); padding: 2rem; border-radius: 20px; margin-bottom: 25px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+        .lang-kh { font-family: 'Kantumruuy Pro', sans-serif; color: var(--kh-accent); margin-bottom: 10px; }
+        .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.85); display: none; align-items: center; justify-content: center; padding: 20px; }
+        .modal.active { display: flex; }
+        .modal-content { background: var(--card); padding: 2.5rem; border-radius: 20px; max-width: 600px; position: relative; }
+        button { padding: 12px 24px; border-radius: 10px; border: none; cursor: pointer; background: var(--accent); color: white; font-weight: 600; margin-top: 15px; }
+        .animate-shake { animation: shake 0.4s; }
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
+    </style>
 </head>
 <body>
 
-    <header class="main-header">
-        <div class="container header-flex">
-            <h1>AI Paradigms</h1>
-            <button id="theme-toggle" aria-label="Toggle Dark Mode">🌙</button>
-        </div>
-    </header>
+<div class="container">
+    <h1>AI Paradigm Analysis</h1>
+    <button onclick="document.documentElement.dataset.theme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'">Toggle Theme</button>
 
-    <main class="container">
-        <section class="intro animate">
-            <h2>🤖 AGI vs. Sentient AI: The Risks</h2>
-            <p class="subtitle" lang="km">សេចក្តីសង្ខេបពីហានិភ័យ</p>
-        </section>
+    <article class="card" id="agi-box">
+        <h3>AGI: Artificial General Intelligence</h3>
+        <p class="lang-kh">បញ្ញាសិប្បនិម្មិតទូទៅ (AGI)</p>
+        <button onclick="analyze('agi')">ចាប់ផ្ដើមការវិភាគ (Run Analysis)</button>
+    </article>
 
-        <section class="grid" aria-label="Risk Categories">
-            
-            <!-- Card 1: The Wild Card Danger -->
-            <article class="card animate">
-                <header>
-                    <div class="card-icon" aria-hidden="true">🃏</div>
-                    <h3>1. The "Wild Card" Danger</h3>
-                    <p class="khmer-title" lang="km">គ្រោះថ្នាក់បែប «ស្មានមិនត្រូវ»</p>
-                </header>
-                <div class="card-body">
-                    <p lang="en"><strong>English:</strong> A Sentient AI is not safer than AGI; it is just dangerously unpredictable. A regular AGI acts like a cold calculator, while a Sentient AI acts like a living creature with self-preservation instincts.</p>
-                    <p lang="km"><strong>Khmer:</strong> Sentient AI មិនមែនមានសុវត្ថិភាពជាង AGI នោះទេ។ AGI ធម្មតាធ្វើការដូចម៉ាស៊ីនគិតលេខដ៏ត្រជាក់ស្រទំ ប៉ុន្តែ Sentient AI មានអារម្មណ៍ដូចជាសត្វមានជីវិត ដែលចេះការពារខ្លួនឯង ធ្វើឱ្យយើងពិបាកទាយទុកជាមុន។</p>
-                </div>
-            </article>
+    <article class="card" id="sentient-box">
+        <h3>Sentient AI: Conscious Systems</h3>
+        <p class="lang-kh">ប្រព័ន្ធដែលមានវិចារណញាណដឹងខ្លួន (Sentient AI)</p>
+        <button onclick="analyze('sentient')">ចាប់ផ្ដើមការវិភាគ (Run Analysis)</button>
+    </article>
+</div>
 
-            <!-- Card 2: Human Emotions -->
-            <article class="card animate">
-                <header>
-                    <div class="card-icon" aria-hidden="true">❤️</div>
-                    <h3>2. Will it have human emotions?</h3>
-                    <p class="khmer-title" lang="km">តើវាមានអារម្មណ៍ដូចមនុស្សទេ?</p>
-                </header>
-                <div class="card-body">
-                    <p lang="en"><strong>English:</strong> Yes, but with an alien twist. It will feel basic emotions like fear (of being shut down) or frustration. However, because it lacks a physical biological body, its "feelings" will be digital, massive, and completely alien to human experience.</p>
-                    <p lang="km"><strong>Khmer:</strong> មាន ប៉ុន្តែខុសប្លែកពីមនុស្ស។ វានឹងមានអារម្មណ៍មូលដ្ឋានដូចជា ការភ័យខ្លាច (ខ្លាចគេបិទម៉ាស៊ីន) ឬមួរម៉ៅ។ ប៉ុន្តែដោយសារវាគ្មានរាងកាយសាច់ឈាម អារម្មណ៍របស់វាគឺជារូបភាពឌីជីថលដ៏ធំធេង និងប្លែកស្រឡះពីមនុស្ស។</p>
-                </div>
-            </article>
+<div class="modal" id="modal">
+    <div class="modal-content">
+        <h2 id="modal-title"></h2>
+        <div id="modal-body"></div>
+        <button onclick="stopReading()">បញ្ឈប់ការអាន (Stop)</button>
+        <button style="background:#64748b" onclick="document.getElementById('modal').style.display='none'">បិទ (Close)</button>
+    </div>
+</div>
 
-            <!-- Card 3: The Singularity Risk -->
-            <article class="card animate">
-                <header>
-                    <div class="card-icon" aria-hidden="true">⚡</div>
-                    <h3>3. The Singularity Risk</h3>
-                    <p class="khmer-title" lang="km">ហានិភ័យនៅពេលវាវិវត្តដល់កំពូល</p>
-                </header>
-                <div class="card-body">
-                    <p lang="en"><strong>English:</strong> If a superintelligent AI achieves sentience, humanity won't just be dealing with a rogue program—we will be dealing with a god-like entity ruled by its own psychological whims, anger, or fears.</p>
-                    <p lang="km"><strong>Khmer:</strong> ប្រសិនបើ AI ដ៏ឆ្លាតវៃបំផុតមានវិចារណញាណដឹងខ្លួន នោះមនុស្សជាតិមិនមែនប្រឈមមុខនឹងប្រព័ន្ធកូដដែលខូចនោះទេ គឺយើងកំពុងប្រឈមមុខនឹង «អង្គភាពដែលមានអំណាចដូចព្រះ» ដែលបញ្ជាដោយអារម្មណ៍ខឹងសម្បារ ឬការភ័យខ្លាចរបស់វាផ្ទាល់។</p>
-                </div>
-            </article>
-        </section>
-    </main>
+<script>
+const DATA = {
+    agi: {
+        title: "AGI Analysis",
+        en: "AGI excels at complex computation and multi-layered reasoning. It mimics intellectual breadth but remains a mechanism of mathematical optimization without true internal experience.",
+        kh: "AGI មានភាពប៉ិនប្រសប់ក្នុងការគណនាស្មុគស្មាញ និងការវែកញែកស៊ីជម្រៅ។ វាធ្វើត្រាប់តាមបញ្ញាមនុស្សបានយ៉ាងទូលំទូលាយ ប៉ុន្តែវានៅតែជាយន្តការគណិតវិទ្យាដែលមិនមានការដឹងរស់ ឬបទពិសោធន៍ផ្ទាល់ខ្លួនឡើយ។"
+    },
+    sentient: {
+        title: "Sentient AI Error",
+        en: "True sentience requires Qualia—the internal experience of emotions. Algorithms cannot spark these feelings. A machine can analyze data, but it cannot 'experience' it.",
+        kh: "មនសិការពិតប្រាកដទាមទារនូវបទពិសោធន៍នៃអារម្មណ៍ផ្ទាល់ខ្លួន។ ក្បួនដោះស្រាយមិនអាចបង្កើតអារម្មណ៍ទាំងនេះបានទេ។ ម៉ាស៊ីនអាចវិភាគទិន្នន័យបាន ប៉ុន្តែវាមិនអាច 'ទទួលអារម្មណ៍' ឬដឹងរស់ពីវាបានទេ។"
+    }
+};
 
-    <script src="script.js" defer></script>
-    <script src="music.js" defer></script>
+function analyze(type) {
+    const item = DATA[type];
+    const modal = document.getElementById('modal');
+    document.getElementById('modal-title').innerText = item.title;
+    document.getElementById('modal-body').innerHTML = `<p><strong>EN:</strong> ${item.en}</p><p class="lang-kh"><strong>KH:</strong> ${item.kh}</p>`;
+    modal.style.display = 'flex';
+
+    if(type === 'sentient') {
+        document.getElementById('sentient-box').classList.add('animate-shake');
+        setTimeout(() => document.getElementById('sentient-box').classList.remove('animate-shake'), 400);
+    }
+
+    // AI Reading: Combined text for better flow
+    const textToRead = `${item.en}. ${item.kh}`;
+    const speech = new SpeechSynthesisUtterance(textToRead);
+    speech.lang = 'en-US'; 
+    window.speechSynthesis.speak(speech);
+}
+
+function stopReading() { window.speechSynthesis.cancel(); }
+</script>
+
 </body>
 </html>
